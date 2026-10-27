@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/*
+ * Tokens visuales del sitio: fondo marfil, texto oscuro y acentos verde lima.
+ * Se usan como utilidades de Tailwind: bg-ivory, text-ink, bg-lime, etc.
+ * TODO: ajustar los valores finales de la paleta y la tipografía.
+ */
+@theme {
+  --color-ivory: #faf8f1;
+  --color-ivory-dark: #f0ece0;
+  --color-ink: #1a1a17;
+  --color-ink-muted: #5c5b55;
+  --color-line: #dedad0;
+  --color-lime: #c6f432;
+  --color-lime-dark: #9fc71c;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-lime);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
