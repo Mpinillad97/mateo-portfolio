@@ -5,7 +5,10 @@ import { site } from "@/data/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: site.name,
+  title: {
+    default: `${site.name} — ${site.role}`,
+    template: `%s — ${site.name}`,
+  },
   description: site.description,
 };
 

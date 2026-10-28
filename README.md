@@ -1,6 +1,6 @@
 # mateo-portfolio
 
-Repositorio del portafolio profesional de Mateo. Por ahora contiene solo el **esqueleto inicial**: una página de inicio estructural y responsive con navegación y secciones provisionales (presentación, proyectos, capacidades, sobre mí y contacto). El contenido real todavía no está definido; todo lo pendiente está marcado con `TODO`.
+Repositorio del portafolio profesional de Mateo, desarrollador Full Stack. El sitio se dirige a dos públicos: equipos de desarrollo que buscan incorporar a alguien y personas o empresas que necesitan un proyecto. Ya existe la estructura de todas las páginas, la navegación y los componentes reutilizables; el contenido definitivo está pendiente y se marca con `TODO` (en el texto y con bloques `TodoBlock` visibles en la página).
 
 El concepto visual acordado es minimalista: fondo marfil, texto oscuro y acentos verde lima.
 
@@ -9,7 +9,7 @@ El concepto visual acordado es minimalista: fondo marfil, texto oscuro y acentos
 - [Next.js](https://nextjs.org/) 16 con App Router
 - React 19 y TypeScript
 - [Tailwind CSS](https://tailwindcss.com/) 4
-- [Motion](https://motion.dev/) para React (`motion`), instalado pero aún sin usar
+- [Motion](https://motion.dev/) para React (`motion`), usado en la tarjeta del hero
 - ESLint 9 con la configuración oficial de Next.js
 
 No hay backend, base de datos, autenticación, llamadas a APIs, analítica ni formularios que envíen información.
@@ -29,29 +29,60 @@ npm run start     # sirve la compilación de producción
 npm run lint      # revisa el código con ESLint
 ```
 
+## Rutas
+
+| Ruta                | Página                                                      |
+| ------------------- | ----------------------------------------------------------- |
+| `/`                 | Home: entrada común con caminos hacia equipos y clientes    |
+| `/para-equipos`     | Perfil profesional para equipos de contratación             |
+| `/para-clientes`    | Soluciones, forma de trabajo y ejemplos para clientes       |
+| `/proyectos`        | Índice de proyectos                                         |
+| `/proyectos/[slug]` | Plantilla de caso de proyecto                               |
+| `/sobre-mi`         | Presentación personal                                       |
+| `/contacto`         | Dos vías: `#oportunidad-laboral` y `#proyecto-cliente`      |
+
+Las rutas se centralizan en `routes` (`data/site.ts`). Todas se generan como páginas estáticas.
+
+### Proyectos y la ruta dinámica
+
+`/proyectos/[slug]` genera una página por cada entrada de `data/projects.ts` (`generateStaticParams`) y devuelve 404 para cualquier otro slug (`dynamicParams = false`). Las tres entradas actuales (`proyecto-1`, `proyecto-2`, `proyecto-3`) son **plantillas** para revisar el diseño: hay que sustituirlas por proyectos confirmados. Los campos opcionales que falten (contexto, contribución, solución, decisiones, tecnologías, resultado, evidencias) se muestran automáticamente como bloques `TODO`. Si se vacía la lista, el índice muestra un aviso y no se genera ninguna página de caso.
+
 ## Estructura de carpetas
 
 ```
-app/
-  layout.tsx        Layout raíz: metadatos, cabecera y pie de página
-  page.tsx          Página de inicio; compone las secciones en orden
-  globals.css       Estilos globales y tokens de color (Tailwind @theme)
+app/                Una carpeta por ruta (page.tsx), más layout.tsx y globals.css
 components/
-  layout/           Header (navegación) y Footer
-  sections/         Una sección de la página por archivo: Hero, Projects,
-                    Capabilities, About, Contact
-  ui/               Piezas reutilizables: Container, Section, Card, ButtonLink
+  layout/           Header, NavLinks (marca la ruta activa) y Footer
+  sections/         Bloques compuestos con contenido de data/: Hero,
+                    EntryPoints, SelectedWork, WorkAreas, AboutTeaser,
+                    AudienceCta, ContactOptionCard, PlaceholderSection
+    hero/           Caras de la tarjeta del hero: CardFace, CodeSample,
+                    ResultPreview
+  projects/         ProjectCard, ProjectGrid y CaseBlock (página de caso)
+  ui/               Piezas genéricas: Container, Section, Band, PageHero,
+                    Eyebrow, Card, ButtonLink, TextLink, CtaBanner,
+                    ItemGrid, Steps, Faq, TodoBlock, LanguageBadge, FlipCard
 data/
-  site.ts           Nombre, navegación, textos del hero, sobre mí y contacto
-  projects.ts       Lista de proyectos (provisional)
-  capabilities.ts   Lista de capacidades (provisional)
+  site.ts           Rutas, navegación, datos generales, hero y tarjeta del hero
+  home.ts           Secciones del Home y cierre reutilizable (AudienceCta)
+  areas.ts          Áreas de trabajo y stack por especialidad
+  projects.ts       Proyectos (plantillas) y textos de la página de caso
+  teams.ts          /para-equipos
+  clients.ts        /para-clientes
+  about.ts          /sobre-mi
+  contact.ts        /contacto
 public/
   images/           Imágenes y recursos visuales del sitio
 ```
 
 ### Cómo editar el contenido
 
-Los textos viven en `data/` y no en los componentes, así que la mayoría de cambios de contenido se hacen allí. Busca `TODO` en el proyecto para ver todo lo que falta completar.
+Los textos viven en `data/` y no en los componentes, así que la mayoría de cambios de contenido se hacen allí. Hay dos tipos de marcador:
+
+- Texto `[TODO: …]` dentro de los datos, para títulos o frases cortas.
+- Bloques `TodoBlock` (recuadro discontinuo con la etiqueta `TODO`) para secciones completas. Sus `hints` describen qué falta escribir; no son contenido final.
+
+Busca `TODO` en el proyecto para ver todo lo pendiente.
 
 ### Colores
 
@@ -69,13 +100,20 @@ Los tokens están en `app/globals.css` dentro de `@theme` y se usan como clases 
 
 ### Motion
 
-`motion` está instalado para animaciones futuras (por ejemplo, el giro de la tarjeta del hero). Se importa desde `motion/react` dentro de componentes de cliente (`"use client"`).
+`motion` se importa desde `motion/react` dentro de componentes de cliente (`"use client"`). Hoy solo lo usa `components/ui/FlipCard.tsx`:
+
+- Al cargar, la tarjeta entra con un giro 3D suave una sola vez y luego queda quieta.
+- Los botones `Código` / `Resultado` giran la tarjeta; funcionan con teclado e indican su estado con `aria-pressed`.
+- Con `MotionConfig reducedMotion="user"`, si el sistema pide reducir el movimiento se omiten los giros y la tarjeta cambia de cara sin rotar.
+
+El código y el resultado de la tarjeta son un ejemplo genérico y ficticio definido en `data/site.ts` (`heroCard`); no provienen de ningún proyecto real.
 
 ## Pendiente
 
-- Contenido real: apellido, rol, textos, proyectos, capacidades y canales de contacto.
+- Contenido real: apellido, proyectos, textos de cada página, stack, biografía, trayectoria y canales de contacto (correo, LinkedIn, CV).
+- Titular del hero (provisional).
 - Tipografía definitiva (ahora se usa la fuente del sistema).
-- Diseño y animación de la tarjeta del hero.
+- Traducciones: el indicador `ES` del navbar es solo visual.
 - Imágenes en `public/images/`.
 - Menú de navegación en móvil (ahora es una fila desplazable).
 - Despliegue (no configurado todavía).

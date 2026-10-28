@@ -1,17 +1,19 @@
-import { About } from "@/components/sections/About";
-import { Capabilities } from "@/components/sections/Capabilities";
-import { Contact } from "@/components/sections/Contact";
+import { AboutTeaser } from "@/components/sections/AboutTeaser";
+import { AudienceCta } from "@/components/sections/AudienceCta";
+import { EntryPoints } from "@/components/sections/EntryPoints";
 import { Hero } from "@/components/sections/Hero";
-import { Projects } from "@/components/sections/Projects";
+import { SelectedWork } from "@/components/sections/SelectedWork";
+import { WorkAreas } from "@/components/sections/WorkAreas";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Projects />
-      <Capabilities />
-      <About />
-      <Contact />
+      <EntryPoints />
+      <SelectedWork />
+      <WorkAreas />
+      <AboutTeaser />
+      <AudienceCta />
     </>
   );
 }
