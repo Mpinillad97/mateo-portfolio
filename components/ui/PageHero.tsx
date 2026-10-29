@@ -23,7 +23,7 @@ export function PageHero({ eyebrow, title, intro, children }: PageHeroProps) {
             {title}
           </h1>
           {intro && (
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-carbon-muted sm:text-xl">
               {intro}
             </p>
           )}

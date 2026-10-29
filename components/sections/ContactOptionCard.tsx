@@ -3,7 +3,7 @@ import { TextLink } from "@/components/ui/TextLink";
 import { TodoBlock } from "@/components/ui/TodoBlock";
 import { type ContactOption } from "@/data/contact";
 
-const dotClasses = { ink: "bg-ink", lime: "bg-lime-dark" };
+const dotClasses = { dark: "bg-carbon", lime: "bg-lime-deep" };
 
 // Una de las dos vías de contacto. No hay formulario ni envío de datos.
 export function ContactOptionCard({ option }: { option: ContactOption }) {
@@ -19,9 +19,9 @@ export function ContactOptionCard({ option }: { option: ContactOption }) {
       <h2 id={`${option.id}-title`} className="text-2xl font-semibold tracking-tight sm:text-3xl">
         {option.title}
       </h2>
-      <p className="mt-4 text-ink-muted">{option.text}</p>
+      <p className="mt-4 text-carbon-muted">{option.text}</p>
 
-      <h3 className="mt-8 font-mono text-[11px] tracking-widest text-ink-muted">
+      <h3 className="mt-8 font-mono text-[11px] tracking-widest text-carbon-muted">
         QUÉ INCLUIR EN EL MENSAJE
       </h3>
       <ul className="mt-2 space-y-1 text-sm">

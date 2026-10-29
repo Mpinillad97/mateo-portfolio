@@ -52,7 +52,9 @@ Las rutas se centralizan en `routes` (`data/site.ts`). Todas se generan como pá
 ```
 app/                Una carpeta por ruta (page.tsx), más layout.tsx y globals.css
 components/
-  layout/           Header, NavLinks (marca la ruta activa) y Footer
+  layout/           Header (navbar grafito con menú móvil) y Footer
+    navbar/         Piezas de la línea lima del navbar: Monogram (logo M),
+                    Rail, BranchFork, MobileMenu, geometría y animación
   sections/         Bloques compuestos con contenido de data/: Hero,
                     EntryPoints, SelectedWork, WorkAreas, AboutTeaser,
                     AudienceCta, ContactOptionCard, PlaceholderSection
@@ -86,17 +88,24 @@ Busca `TODO` en el proyecto para ver todo lo pendiente.
 
 ### Colores
 
-Los tokens están en `app/globals.css` dentro de `@theme` y se usan como clases de Tailwind:
+Paleta en exploración: fondo verde niebla, texto carbón, acento lima y superficies grafito puntuales. Todos los colores están en `app/globals.css` dentro de `@theme` (con los contrastes de referencia en un comentario) y se usan como clases de Tailwind (`bg-mist`, `text-carbon`, etc.). Para ajustar la paleta solo hay que cambiar esos valores.
 
-| Token           | Uso                         |
-| --------------- | --------------------------- |
-| `ivory`         | Fondo principal             |
-| `ivory-dark`    | Fondos secundarios          |
-| `ink`           | Texto principal             |
-| `ink-muted`     | Texto secundario            |
-| `line`          | Bordes y separadores        |
-| `lime`          | Acento                      |
-| `lime-dark`     | Acento sobre fondos claros  |
+| Token          | Valor     | Uso                                                       |
+| -------------- | --------- | --------------------------------------------------------- |
+| `mist`         | `#dce3d8` | Fondo principal de páginas y secciones                    |
+| `mist-light`   | `#e8ede5` | Superficies elevadas: tarjetas, control de la tarjeta     |
+| `mist-dark`    | `#ccd5c7` | Superficies hundidas: bloques TODO, hover                 |
+| `line`         | `#b9c4b4` | Bordes y separadores decorativos                          |
+| `carbon`       | `#182019` | Texto principal y botón oscuro                            |
+| `carbon-muted` | `#4a564b` | Texto secundario                                          |
+| `graphite`     | `#141715` | Superficies oscuras: tarjeta de código y cierre destacado |
+| `ivory`        | `#f3f0e7` | Texto sobre grafito o carbón                              |
+| `ivory-muted`  | `#a3a29b` | Texto secundario sobre grafito                            |
+| `lime`         | `#b6e45c` | Acciones, indicadores y detalles                          |
+| `lime-hover`   | `#a5d54a` | Hover de los botones lima                                 |
+| `lime-deep`    | `#3a6212` | Acento legible sobre fondos claros: foco, subrayados      |
+
+La lima tiene muy poco contraste con el verde niebla (1.1:1), así que sobre fondos claros no se usa como texto, borde ni color de foco; en esos casos se usa `lime-deep`.
 
 ### Motion
 

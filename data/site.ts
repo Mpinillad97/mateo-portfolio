@@ -26,7 +26,6 @@ export const projectPath = (slug: string) => `${routes.projects}/${slug}`;
 
 export const site = {
   name: "Mateo",
-  brand: { name: "MATEO", role: "ENGINEER" },
   // TODO: confirmar el apellido o la forma en que se mostrará el nombre completo.
   fullName: "Mateo [TODO: apellido]",
   role: "Desarrollador Full Stack",
@@ -42,6 +41,32 @@ export const navItems: NavItem[] = [
   { label: "Sobre mí", href: routes.about },
   { label: "Contacto", href: routes.contact },
 ];
+
+export type NavbarRoute = {
+  key: "teams" | "clients";
+  label: string;
+  text: string;
+  href: string;
+};
+
+// Navbar: enlaces secundarios y los dos recorridos principales a los que
+// llegan las ramas de la línea. El pie de página sigue usando `navItems`.
+export const navbar = {
+  homeLabel: "Mateo, ir al inicio",
+  secondary: [
+    { label: "Proyectos", href: routes.projects },
+    { label: "Sobre mí", href: routes.about },
+    { label: "Contacto", href: routes.contact },
+  ] satisfies NavItem[],
+  primary: [
+    { key: "teams", label: "EQUIPOS", text: "Ver perfil", href: routes.teams },
+    { key: "clients", label: "CLIENTES", text: "Tengo un proyecto", href: routes.clients },
+  ] satisfies NavbarRoute[],
+  menu: { open: "Menú", close: "Cerrar", label: "Menú principal" },
+};
+
+export const isCurrentPath = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(`${href}/`);
 
 export const hero = {
   eyebrow: "DESARROLLADOR FULL STACK",

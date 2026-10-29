@@ -51,7 +51,7 @@ export default function TeamsPage() {
       <PlaceholderSection block={contribution} />
 
       <Band label={closing.title}>
-        <CtaBanner tone="ink" eyebrow={closing.eyebrow} title={closing.title}>
+        <CtaBanner tone="dark" eyebrow={closing.eyebrow} title={closing.title}>
           <ButtonLink href={closing.cta.href} variant="light">
             {closing.cta.label} <span aria-hidden className="ml-2">→</span>
           </ButtonLink>

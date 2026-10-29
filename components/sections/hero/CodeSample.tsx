@@ -6,7 +6,7 @@ import { CardFace } from "./CardFace";
 const TOKEN = /(\/\/.*$|"[^"]*"|\b(?:type|function|return)\b|\b\d+\b)/;
 
 function tokenClass(token: string) {
-  if (token.startsWith("//")) return "text-ivory/40";
+  if (token.startsWith("//")) return "text-ivory-muted";
   if (token.startsWith('"')) return "text-ivory";
   return "text-lime";
 }

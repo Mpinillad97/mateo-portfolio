@@ -19,7 +19,7 @@ export function CaseBlock({ id, title, todo, children }: CaseBlockProps) {
       <h2 id={`${id}-title`} className="text-xl font-semibold tracking-tight">
         {title}
       </h2>
-      <div className="max-w-2xl text-lg leading-relaxed text-ink-muted">
+      <div className="max-w-2xl text-lg leading-relaxed text-carbon-muted">
         {children ?? <TodoBlock title={todo} />}
       </div>
     </section>

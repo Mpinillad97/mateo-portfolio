@@ -7,7 +7,7 @@ export type EntryPoint = {
   title: string;
   text: string;
   link: LinkData;
-  tone: "ink" | "lime";
+  tone: "dark" | "lime";
 };
 
 export const entryPoints: EntryPoint[] = [
@@ -16,7 +16,7 @@ export const entryPoints: EntryPoint[] = [
     title: "¿Buscas a alguien para tu equipo?",
     text: "Perfil profesional, capacidades técnicas y proyectos, pensados para quien contrata o lidera un equipo de desarrollo.",
     link: { label: "Ir al perfil profesional", href: routes.teams },
-    tone: "ink",
+    tone: "dark",
   },
   {
     eyebrow: "PARA CLIENTES",

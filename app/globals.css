@@ -1,18 +1,42 @@
 @import "tailwindcss";
 
 /*
- * Tokens visuales del sitio: fondo marfil, texto oscuro y acentos verde lima.
- * Se usan como utilidades de Tailwind: bg-ivory, text-ink, bg-lime, etc.
- * TODO: ajustar los valores finales de la paleta y la tipografía.
+ * Paleta del sitio (exploración): fondo verde niebla, texto carbón, acento
+ * lima y superficies grafito puntuales con texto marfil.
+ *
+ * Todos los colores se definen aquí y se usan como utilidades de Tailwind
+ * (bg-mist, text-carbon, bg-graphite, text-ivory, bg-lime…). Para ajustar la
+ * paleta basta con cambiar estos valores. Contrastes de referencia (WCAG):
+ *
+ *   carbon       / mist        12.7:1
+ *   carbon-muted / mist-*      ≥ 5.1:1  (también 5.2:1 sobre lime)
+ *   lime-deep    / mist-*      ≥ 4.7:1  (foco, subrayados y detalles en claro)
+ *   ivory        / graphite    15.8:1
+ *   ivory-muted  / graphite    ≥ 6:1
+ *   carbon       / lime        11.3:1
+ *   lime         / mist         1.1:1  → la lima no se usa como texto,
+ *                                         borde ni foco sobre fondo claro.
  */
 @theme {
-  --color-ivory: #faf8f1;
-  --color-ivory-dark: #f0ece0;
-  --color-ink: #1a1a17;
-  --color-ink-muted: #5c5b55;
-  --color-line: #dedad0;
-  --color-lime: #c6f432;
-  --color-lime-dark: #9fc71c;
+  /* Fondos claros */
+  --color-mist: #dce3d8; /* fondo principal */
+  --color-mist-light: #e8ede5; /* superficies elevadas: tarjetas, controles */
+  --color-mist-dark: #ccd5c7; /* superficies hundidas: TODO, hover */
+  --color-line: #b9c4b4; /* bordes y separadores decorativos */
+
+  /* Texto sobre fondos claros */
+  --color-carbon: #182019; /* texto principal y botón oscuro */
+  --color-carbon-muted: #4a564b; /* texto secundario */
+
+  /* Superficies oscuras puntuales */
+  --color-graphite: #141715; /* tarjeta de código y cierre destacado */
+  --color-ivory: #f3f0e7; /* texto sobre grafito o carbón */
+  --color-ivory-muted: #a3a29b; /* texto secundario sobre grafito */
+
+  /* Acento */
+  --color-lime: #b6e45c; /* acciones, indicadores y detalles */
+  --color-lime-hover: #a5d54a; /* hover de botones lima */
+  --color-lime-deep: #3a6212; /* versión legible del acento sobre fondos claros */
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -23,15 +47,15 @@ html {
 }
 
 body {
-  background-color: var(--color-ivory);
-  color: var(--color-ink);
+  background-color: var(--color-mist);
+  color: var(--color-carbon);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
   background-color: var(--color-lime);
-  color: var(--color-ink);
+  color: var(--color-carbon);
 }
 
 @media (prefers-reduced-motion: reduce) {

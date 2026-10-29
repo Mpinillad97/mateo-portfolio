@@ -36,7 +36,7 @@ export function ProjectCard({
 
   // El enlace del título cubre toda la tarjeta con un pseudo-elemento.
   return (
-    <Card className="relative flex h-full flex-col transition-colors hover:border-ink/40 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-lime-dark">
+    <Card className="relative flex h-full flex-col transition-colors hover:border-carbon/40 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-lime-deep">
       <h3 className="text-lg font-semibold">
         <Link
           href={projectPath(project.slug)}
@@ -45,13 +45,13 @@ export function ProjectCard({
           {project.title}
         </Link>
       </h3>
-      <p className="mt-2 text-sm text-ink-muted">{project.summary}</p>
+      <p className="mt-2 text-sm text-carbon-muted">{project.summary}</p>
 
       {items.length > 0 && (
         <dl className="mt-5 space-y-3 text-sm">
           {items.map((item) => (
             <div key={item.label}>
-              <dt className="font-mono text-[11px] tracking-widest text-ink-muted">
+              <dt className="font-mono text-[11px] tracking-widest text-carbon-muted">
                 {item.label}
               </dt>
               <dd className="mt-1">{item.value}</dd>
@@ -68,7 +68,7 @@ export function ProjectCard({
             </li>
           ))}
         </ul>
-        <span aria-hidden className="shrink-0 font-mono text-xs text-ink-muted">
+        <span aria-hidden className="shrink-0 font-mono text-xs text-carbon-muted">
           Ver caso →
         </span>
       </div>

@@ -67,7 +67,7 @@ export function FlipCard({
           <div
             role="group"
             aria-label={controlsLabel}
-            className="inline-flex rounded-full border border-line bg-ivory p-1"
+            className="inline-flex rounded-full border border-line bg-mist-light p-1"
           >
             {options.map((option) => {
               const active = flipped === option.value;
@@ -78,8 +78,8 @@ export function FlipCard({
                   aria-controls={cardId}
                   aria-pressed={active}
                   onClick={() => setFlipped(option.value)}
-                  className={`rounded-full px-4 py-1.5 font-mono text-xs font-medium tracking-wider transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-dark ${
-                    active ? "bg-ink text-ivory" : "text-ink-muted hover:text-ink"
+                  className={`rounded-full px-4 py-1.5 font-mono text-xs font-medium tracking-wider transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-deep ${
+                    active ? "bg-carbon text-ivory" : "text-carbon-muted hover:text-carbon"
                   }`}
                 >
                   {option.label}

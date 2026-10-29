@@ -11,7 +11,7 @@ export type ContactOption = {
   include: string[];
   channelTodo: string;
   related: LinkData;
-  tone: "ink" | "lime";
+  tone: "dark" | "lime";
 };
 
 export const contactPage = {
@@ -29,7 +29,7 @@ export const contactOptions: ContactOption[] = [
     include: ["[TODO: qué información conviene incluir en el mensaje.]"],
     channelTodo: "Canal profesional (correo o LinkedIn) cuando esté confirmado",
     related: { label: "Ver perfil para equipos", href: routes.teams },
-    tone: "ink",
+    tone: "dark",
   },
   {
     id: "proyecto-cliente",

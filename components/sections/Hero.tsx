@@ -33,7 +33,7 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-muted sm:text-xl">
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-carbon-muted sm:text-xl">
             {hero.intro}
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

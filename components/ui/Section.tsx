@@ -38,7 +38,7 @@ export function Section({
             >
               {title}
             </h2>
-            {intro && <p className="mt-4 text-lg text-ink-muted">{intro}</p>}
+            {intro && <p className="mt-4 text-lg text-carbon-muted">{intro}</p>}
           </div>
           {action && <div className="shrink-0">{action}</div>}
         </header>

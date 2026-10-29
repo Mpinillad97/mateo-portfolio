@@ -8,7 +8,7 @@ export function ResultPreview() {
   return (
     <CardFace meta={heroCard.controls.result.toUpperCase()}>
       <div className="flex h-full flex-col">
-        <p className="font-mono text-[12px] text-ivory/50 sm:text-[13px]">
+        <p className="font-mono text-[12px] text-ivory-muted sm:text-[13px]">
           <span className="text-lime">→</span> {result.title}
         </p>
 
@@ -24,7 +24,7 @@ export function ResultPreview() {
               key={step}
               className="flex items-center gap-4 rounded-xl border border-ivory/10 px-4 py-3"
             >
-              <span className="font-mono text-xs text-ivory/40">
+              <span className="font-mono text-xs text-ivory-muted">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="flex-1 font-medium">{step}</span>
@@ -36,7 +36,7 @@ export function ResultPreview() {
           ))}
         </ol>
 
-        <p className="mt-auto pt-5 text-xs text-ivory/40">{result.note}</p>
+        <p className="mt-auto pt-5 text-xs text-ivory-muted">{result.note}</p>
       </div>
     </CardFace>
   );

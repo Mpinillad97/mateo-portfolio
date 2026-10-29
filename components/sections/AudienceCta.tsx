@@ -10,7 +10,7 @@ export function AudienceCta() {
   return (
     <Band label={audienceCta.label}>
       <div className="grid gap-6 md:grid-cols-2">
-        <CtaBanner tone="ink" eyebrow={teams.eyebrow} title={teams.title}>
+        <CtaBanner tone="dark" eyebrow={teams.eyebrow} title={teams.title}>
           <ButtonLink href={teams.link.href} variant="light">
             {teams.link.label} <span aria-hidden className="ml-2">→</span>
           </ButtonLink>

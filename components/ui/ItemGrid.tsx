@@ -23,14 +23,14 @@ export function ItemGrid({ items, columns = 2, numbered = false }: ItemGridProps
       className={`grid gap-px overflow-hidden rounded-2xl border border-line bg-line ${columnClasses[columns]}`}
     >
       {items.map((item, i) => (
-        <li key={item.title} className="flex flex-col bg-ivory p-6 sm:p-8">
+        <li key={item.title} className="flex flex-col bg-mist p-6 sm:p-8">
           {numbered && (
-            <span className="mb-6 font-mono text-xs text-ink-muted">
+            <span className="mb-6 font-mono text-xs text-carbon-muted">
               {String(i + 1).padStart(2, "0")}
             </span>
           )}
           <h3 className="text-lg font-semibold">{item.title}</h3>
-          <p className="mt-2 text-sm text-ink-muted">{item.description}</p>
+          <p className="mt-2 text-sm text-carbon-muted">{item.description}</p>
           {item.tags && item.tags.length > 0 && (
             <ul className="mt-5 flex flex-wrap gap-2">
               {item.tags.map((tag) => (
