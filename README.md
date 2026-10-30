@@ -58,14 +58,15 @@ components/
   sections/         Bloques compuestos con contenido de data/: Hero,
                     EntryPoints, SelectedWork, WorkAreas, AboutTeaser,
                     AudienceCta, ContactOptionCard, PlaceholderSection
-    hero/           Caras de la tarjeta del hero: CardFace, CodeSample,
-                    ResultPreview
+    hero/           Muestra de capacidades del hero: ShowcaseCard (carrusel),
+                    ShowcaseFace (marco) y views/ (una demo por área)
   projects/         ProjectCard, ProjectGrid y CaseBlock (página de caso)
   ui/               Piezas genéricas: Container, Section, Band, PageHero,
                     Eyebrow, Card, ButtonLink, TextLink, CtaBanner,
-                    ItemGrid, Steps, Faq, TodoBlock, LanguageBadge, FlipCard
+                    ItemGrid, Steps, Faq, TodoBlock, LanguageBadge
 data/
-  site.ts           Rutas, navegación, datos generales, hero y tarjeta del hero
+  site.ts           Rutas, navegación, datos generales y textos del hero
+  showcase.ts       Las cuatro vistas de la muestra del hero (contenido demo)
   home.ts           Secciones del Home y cierre reutilizable (AudienceCta)
   areas.ts          Áreas de trabajo y stack por especialidad
   projects.ts       Proyectos (plantillas) y textos de la página de caso
@@ -109,13 +110,18 @@ La lima tiene muy poco contraste con el verde niebla (1.1:1), así que sobre fon
 
 ### Motion
 
-`motion` se importa desde `motion/react` dentro de componentes de cliente (`"use client"`). Hoy solo lo usa `components/ui/FlipCard.tsx`:
+`motion` se importa desde `motion/react` dentro de componentes de cliente (`"use client"`). Se usa en dos sitios:
 
-- Al cargar, la tarjeta entra con un giro 3D suave una sola vez y luego queda quieta.
-- Los botones `Código` / `Resultado` giran la tarjeta; funcionan con teclado e indican su estado con `aria-pressed`.
-- Con `MotionConfig reducedMotion="user"`, si el sistema pide reducir el movimiento se omiten los giros y la tarjeta cambia de cara sin rotar.
+- **Navbar** (`components/layout/navbar/`): la línea lima se dibuja una sola vez al cargar.
+- **Muestra del hero** (`components/sections/hero/ShowcaseCard.tsx`): cuatro vistas (Web / Frontend, Backend / Integraciones, IA / Automatización, Cloud / DevOps) en el mismo marco.
+  - Avanza cada 6 s con un giro 3D; la barra de progreso de la vista activa se llena durante ese tiempo.
+  - Se pausa con el cursor encima, con el foco de teclado dentro, con la pestaña oculta o con el botón de pausa (conserva el progreso).
+  - Botones de vista anterior y siguiente, y los indicadores permiten ir a cualquier vista.
+  - Con movimiento reducido no hay giro ni avance automático (y no se muestra el botón de pausa); el cambio manual usa un fundido.
 
-El código y el resultado de la tarjeta son un ejemplo genérico y ficticio definido en `data/site.ts` (`heroCard`); no provienen de ningún proyecto real.
+En ambos casos el movimiento reducido se comprueba con `useReducedMotion`, porque `MotionConfig reducedMotion="user"` no cubre `pathLength` ni la opacidad.
+
+El contenido de las cuatro vistas está en `data/showcase.ts` y es **demostrativo** (etiquetado `DEMO VISUAL`): interfaz, código y flujos genéricos, sin proyectos, clientes ni datos reales. Está pensado para sustituirse por evidencia real de proyectos.
 
 ## Pendiente
 

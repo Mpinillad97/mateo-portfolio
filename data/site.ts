@@ -68,49 +68,14 @@ export const navbar = {
 export const isCurrentPath = (pathname: string, href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 
+// Hero del Home (exploración). La tarjeta de capacidades está en showcase.ts.
 export const hero = {
   eyebrow: "DESARROLLADOR FULL STACK",
-  // TODO: titular provisional; revisar si debe reflejar los dos objetivos.
   // Cada elemento se muestra en su propia línea; la última lleva el acento.
-  titleLines: ["Ideas claras.", "Software bien construido."],
+  titleLines: ["De la interfaz", "a la infraestructura."],
   intro:
-    "Desarrollador Full Stack con más experiencia en backend. Busco aportar a equipos de producto y colaborar en sitios web, integraciones y automatizaciones.",
-  // Una acción por cada objetivo: empleo en un equipo y proyectos para clientes.
-  teamsCta: { label: "Ver perfil para equipos", href: routes.teams },
-  clientsCta: { label: "Tengo un proyecto", href: routes.clients },
-};
-
-// Tarjeta del hero: código genérico de ejemplo y su resultado ficticio.
-// No representa código ni datos de ningún cliente o proyecto real.
-export const heroCard = {
-  badge: "EJEMPLO INTERACTIVO",
-  fileName: "ejemplo.ts",
-  code: [
-    "// Fragmento genérico de demostración",
-    "type Idea = { name: string; steps: string[] };",
-    "",
-    "function build(idea: Idea) {",
-    "  return idea.steps.map((step, i) => ({",
-    "    order: i + 1,",
-    "    step,",
-    '    status: "listo",',
-    "  }));",
-    "}",
-    "",
-    "build({",
-    '  name: "demo",',
-    '  steps: ["Entender", "Diseñar", "Construir"],',
-    "});",
-  ],
-  result: {
-    title: 'build({ name: "demo" })',
-    steps: ["Entender", "Diseñar", "Construir"],
-    status: "listo",
-    note: "Resultado ficticio, solo con fines demostrativos.",
-  },
-  controls: {
-    group: "Cambiar la vista de la tarjeta",
-    code: "Código",
-    result: "Resultado",
-  },
+    "Soy Mateo, desarrollador de software. Construyo productos web, integraciones y automatizaciones con IA.",
+  // Una acción por cada público: equipos de contratación y clientes.
+  teamsCta: { audience: "PARA EQUIPOS", label: "Ver perfil para equipos", href: routes.teams },
+  clientsCta: { audience: "PARA CLIENTES", label: "Tengo un proyecto", href: routes.clients },
 };

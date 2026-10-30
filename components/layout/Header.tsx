@@ -28,7 +28,7 @@ type PrimaryLinkProps = {
   onHighlight: (branch: Branch | null) => void;
 };
 
-// Destino de una rama: etiqueta pequeÃ±a y enlace. Al pasar el cursor o
+// Destino de una rama: etiqueta pequeña y enlace. Al pasar el cursor o
 // enfocarlo con teclado, resalta su rama.
 function PrimaryLink({ route, active, onHighlight }: PrimaryLinkProps) {
   return (
@@ -53,16 +53,16 @@ function PrimaryLink({ route, active, onHighlight }: PrimaryLinkProps) {
       >
         {route.text}
         <span aria-hidden className="ml-1 text-lime">
-          â†—
+          ↗
         </span>
       </span>
     </Link>
   );
 }
 
-// Navbar: franja grafito con una lÃ­nea lima que nace en el monograma, pasa
+// Navbar: franja grafito con una línea lima que nace en el monograma, pasa
 // bajo los enlaces secundarios y se bifurca hacia los dos recorridos
-// principales (equipos y clientes). La lÃ­nea se dibuja una vez al cargar.
+// principales (equipos y clientes). La línea se dibuja una vez al cargar.
 export function Header() {
   const pathname = usePathname();
   const [highlighted, setHighlighted] = useState<Branch | null>(null);
@@ -89,7 +89,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-graphite text-ivory">
       <Container>
         {/* Escritorio */}
-        <nav aria-label="NavegaciÃ³n principal" className="hidden h-16 items-stretch lg:flex">
+        <nav aria-label="Navegación principal" className="hidden h-16 items-stretch lg:flex">
           <HomeLink />
           <Rail className="relative min-w-8 flex-1" delay={0.2} duration={0.2} />
 
@@ -109,7 +109,7 @@ export function Header() {
                     >
                       {item.label}
                     </Link>
-                    {/* PÃ¡gina actual: nodo sobre la lÃ­nea, bajo el enlace. */}
+                    {/* Página actual: nodo sobre la línea, bajo el enlace. */}
                     {active && (
                       <span
                         aria-hidden
@@ -142,7 +142,7 @@ export function Header() {
           </div>
         </nav>
 
-        {/* MÃ³vil: monograma, lÃ­nea con una bifurcaciÃ³n simplificada y menÃº. */}
+        {/* Móvil: monograma, línea con una bifurcación simplificada y menú. */}
         <div className="flex h-16 items-stretch lg:hidden">
           <HomeLink />
           <Rail className="relative min-w-6 flex-1" delay={0.2} duration={0.3} />
