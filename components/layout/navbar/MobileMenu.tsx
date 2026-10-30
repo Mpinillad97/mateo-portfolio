@@ -12,15 +12,17 @@ type MobileMenuProps = {
 
 const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime";
 
-// Menú desplegable en móvil. Las dos rutas principales cuelgan de una línea
-// vertical que se bifurca; la geometría del SVG depende de que cada opción
-// mida 64 px (h-16) con 12 px de separación (space-y-3).
+// Panel del menú. En móvil muestra las dos rutas principales (colgando de una
+// línea vertical que se bifurca), los enlaces secundarios y el idioma. En
+// escritorio, donde las rutas principales y el idioma ya están en la barra,
+// solo muestra los enlaces secundarios en fila. La geometría del SVG depende
+// de que cada opción mida 64 px (h-16) con 12 px de separación (space-y-3).
 export function MobileMenu({ id, open, pathname, onNavigate }: MobileMenuProps) {
   return (
-    <div id={id} hidden={!open} className="border-t border-ivory/10 lg:hidden">
-      <Container className="py-6">
+    <div id={id} hidden={!open} className="border-t border-ivory/10">
+      <Container className="py-6 lg:py-4">
         <nav aria-label={navbar.menu.label}>
-          <div className="relative pl-8">
+          <div className="relative pl-8 lg:hidden">
             <svg
               aria-hidden
               viewBox="0 0 28 140"
@@ -65,7 +67,7 @@ export function MobileMenu({ id, open, pathname, onNavigate }: MobileMenuProps) 
             </ul>
           </div>
 
-          <ul className="mt-6 border-t border-ivory/10 pt-2">
+          <ul className="mt-6 border-t border-ivory/10 pt-2 lg:mt-0 lg:flex lg:justify-end lg:gap-10 lg:border-0 lg:pt-0">
             {navbar.secondary.map((item) => {
               const active = isCurrentPath(pathname, item.href);
               return (
@@ -86,7 +88,7 @@ export function MobileMenu({ id, open, pathname, onNavigate }: MobileMenuProps) 
             })}
           </ul>
 
-          <div className="mt-4">
+          <div className="mt-4 lg:hidden">
             <LanguageBadge code={site.language.code} label={site.language.label} />
           </div>
         </nav>

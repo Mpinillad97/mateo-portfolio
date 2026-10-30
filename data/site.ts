@@ -68,14 +68,14 @@ export const navbar = {
 export const isCurrentPath = (pathname: string, href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 
-// Hero del Home (exploración). La tarjeta de capacidades está en showcase.ts.
+// Hero del Home (exploración). La vista de producto está en heroShowcase.ts.
 export const hero = {
   eyebrow: "DESARROLLADOR FULL STACK",
-  // Cada elemento se muestra en su propia línea; la última lleva el acento.
-  titleLines: ["De la interfaz", "a la infraestructura."],
+  // Cada elemento se muestra en su propia línea; el punto final va en lima.
+  titleLines: ["De la interfaz a la", "infraestructura."],
   intro:
     "Soy Mateo, desarrollador de software. Construyo productos web, integraciones y automatizaciones con IA.",
   // Una acción por cada público: equipos de contratación y clientes.
-  teamsCta: { audience: "PARA EQUIPOS", label: "Ver perfil para equipos", href: routes.teams },
-  clientsCta: { audience: "PARA CLIENTES", label: "Tengo un proyecto", href: routes.clients },
+  teamsCta: { label: "Para equipos", href: routes.teams },
+  clientsCta: { label: "Tengo un proyecto", href: routes.clients },
 };

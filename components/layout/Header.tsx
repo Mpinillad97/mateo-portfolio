@@ -11,7 +11,7 @@ import { MobileMenu } from "./navbar/MobileMenu";
 import { Monogram } from "./navbar/Monogram";
 import { Rail } from "./navbar/Rail";
 
-const MENU_ID = "menu-movil";
+const MENU_ID = "menu-navegacion";
 const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime";
 
 function HomeLink() {
@@ -60,25 +60,66 @@ function PrimaryLink({ route, active, onHighlight }: PrimaryLinkProps) {
   );
 }
 
-// Navbar: franja grafito con una línea lima que nace en el monograma, pasa
-// bajo los enlaces secundarios y se bifurca hacia los dos recorridos
-// principales (equipos y clientes). La línea se dibuja una vez al cargar.
+type MenuButtonProps = {
+  open: boolean;
+  onToggle: () => void;
+  buttonRef: React.RefObject<HTMLButtonElement | null>;
+};
+
+// Control que abre el panel con los enlaces secundarios (y, en móvil, también
+// las dos rutas principales).
+function MenuButton({ open, onToggle, buttonRef }: MenuButtonProps) {
+  return (
+    <button
+      ref={buttonRef}
+      type="button"
+      aria-expanded={open}
+      aria-controls={MENU_ID}
+      onClick={onToggle}
+      className={`inline-flex h-10 items-center gap-2.5 rounded-full border border-ivory/25 px-4 text-sm font-medium transition-colors hover:border-ivory/50 ${focusRing}`}
+    >
+      <span aria-hidden className="relative h-3 w-4">
+        <span
+          className={`absolute left-0 h-0.5 w-4 bg-lime transition-transform motion-reduce:transition-none ${
+            open ? "top-[5px] rotate-45" : "top-0"
+          }`}
+        />
+        <span
+          className={`absolute left-0 h-0.5 w-4 bg-lime transition-transform motion-reduce:transition-none ${
+            open ? "top-[5px] -rotate-45" : "top-2.5"
+          }`}
+        />
+      </span>
+      {open ? navbar.menu.close : navbar.menu.open}
+    </button>
+  );
+}
+
+// Navbar: franja grafito con una línea lima que nace en el monograma y se
+// bifurca hacia los dos recorridos principales (equipos y clientes). Los
+// enlaces secundarios están en el menú. La línea se dibuja una vez al cargar.
 export function Header() {
   const pathname = usePathname();
   const [highlighted, setHighlighted] = useState<Branch | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuButton = useRef<HTMLButtonElement>(null);
+  const desktopButton = useRef<HTMLButtonElement>(null);
+  const mobileButton = useRef<HTMLButtonElement>(null);
 
   const currentBranch =
     navbar.primary.find((route) => isCurrentPath(pathname, route.href))?.key ?? null;
   const emphasis = highlighted ?? currentBranch;
+  const toggleMenu = () => setMenuOpen((open) => !open);
 
   useEffect(() => {
     if (!menuOpen) return;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
-        menuButton.current?.focus();
+        // Devuelve el foco al botón visible (escritorio o móvil).
+        const visible = [desktopButton.current, mobileButton.current].find(
+          (button) => button && button.offsetParent !== null,
+        );
+        visible?.focus();
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -91,39 +132,8 @@ export function Header() {
         {/* Escritorio */}
         <nav aria-label="Navegación principal" className="hidden h-16 items-stretch lg:flex">
           <HomeLink />
-          <Rail className="relative min-w-8 flex-1" delay={0.2} duration={0.2} />
-
-          <div className="relative flex items-stretch px-6">
-            <Rail className="absolute inset-0" delay={0.38} duration={0.24} />
-            <ul className="relative flex items-stretch gap-8">
-              {navbar.secondary.map((item) => {
-                const active = isCurrentPath(pathname, item.href);
-                return (
-                  <li key={item.href} className="relative flex items-center">
-                    <Link
-                      href={item.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`rounded-sm text-sm transition-colors hover:text-ivory ${
-                        active ? "text-ivory" : "text-ivory-muted"
-                      } ${focusRing}`}
-                    >
-                      {item.label}
-                    </Link>
-                    {/* Página actual: nodo sobre la línea, bajo el enlace. */}
-                    {active && (
-                      <span
-                        aria-hidden
-                        className="absolute top-[42px] left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-lime ring-4 ring-graphite"
-                      />
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          <Rail className="relative min-w-8 flex-1" delay={0.6} duration={0.12} />
-          <BranchFork topY={18} width={44} emphasis={emphasis} delay={0.7} />
+          <Rail className="relative min-w-8 flex-1" delay={0.2} duration={0.45} />
+          <BranchFork topY={18} width={44} emphasis={emphasis} delay={0.62} />
 
           <ul className="ml-2 flex flex-col pt-1">
             {navbar.primary.map((route) => (
@@ -137,8 +147,9 @@ export function Header() {
             ))}
           </ul>
 
-          <div className="ml-8 flex items-center">
+          <div className="ml-10 flex items-center gap-3">
             <LanguageBadge code={site.language.code} label={site.language.label} />
+            <MenuButton open={menuOpen} onToggle={toggleMenu} buttonRef={desktopButton} />
           </div>
         </nav>
 
@@ -148,28 +159,7 @@ export function Header() {
           <Rail className="relative min-w-6 flex-1" delay={0.2} duration={0.3} />
           <BranchFork topY={26} width={32} emphasis={null} delay={0.5} />
           <div className="ml-3 flex items-center">
-            <button
-              ref={menuButton}
-              type="button"
-              aria-expanded={menuOpen}
-              aria-controls={MENU_ID}
-              onClick={() => setMenuOpen((open) => !open)}
-              className={`inline-flex h-10 items-center gap-2.5 rounded-full border border-ivory/25 px-4 text-sm font-medium ${focusRing}`}
-            >
-              <span aria-hidden className="relative h-3 w-4">
-                <span
-                  className={`absolute left-0 h-0.5 w-4 bg-lime transition-transform motion-reduce:transition-none ${
-                    menuOpen ? "top-[5px] rotate-45" : "top-0"
-                  }`}
-                />
-                <span
-                  className={`absolute left-0 h-0.5 w-4 bg-lime transition-transform motion-reduce:transition-none ${
-                    menuOpen ? "top-[5px] -rotate-45" : "top-2.5"
-                  }`}
-                />
-              </span>
-              {menuOpen ? navbar.menu.close : navbar.menu.open}
-            </button>
+            <MenuButton open={menuOpen} onToggle={toggleMenu} buttonRef={mobileButton} />
           </div>
         </div>
       </Container>

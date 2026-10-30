@@ -52,21 +52,25 @@ Las rutas se centralizan en `routes` (`data/site.ts`). Todas se generan como pá
 ```
 app/                Una carpeta por ruta (page.tsx), más layout.tsx y globals.css
 components/
-  layout/           Header (navbar grafito con menú móvil) y Footer
+  layout/           Header (navbar grafito; los enlaces secundarios van en
+                    el menú) y Footer
     navbar/         Piezas de la línea lima del navbar: Monogram (logo M),
-                    Rail, BranchFork, MobileMenu, geometría y animación
+                    Rail, BranchFork, MobileMenu (panel del menú en todos
+                    los tamaños), geometría y animación
   sections/         Bloques compuestos con contenido de data/: Hero,
                     EntryPoints, SelectedWork, WorkAreas, AboutTeaser,
                     AudienceCta, ContactOptionCard, PlaceholderSection
-    hero/           Muestra de capacidades del hero: ShowcaseCard (carrusel),
-                    ShowcaseFace (marco) y views/ (una demo por área)
+    hero/           Escena de producto del hero: HeroShowcase, AreaTabs,
+                    BrowserFrame, PhoneFrame y scene/ (app ficticia: AppShell,
+                    MobileShell, una vista por área, iconos y piezas)
   projects/         ProjectCard, ProjectGrid y CaseBlock (página de caso)
   ui/               Piezas genéricas: Container, Section, Band, PageHero,
                     Eyebrow, Card, ButtonLink, TextLink, CtaBanner,
                     ItemGrid, Steps, Faq, TodoBlock, LanguageBadge
 data/
   site.ts           Rutas, navegación, datos generales y textos del hero
-  showcase.ts       Las cuatro vistas de la muestra del hero (contenido demo)
+  heroShowcase.ts   Escena del hero: áreas, navegación y contenido demo de
+                    cada área (Web, Backend, IA, Cloud)
   home.ts           Secciones del Home y cierre reutilizable (AudienceCta)
   areas.ts          Áreas de trabajo y stack por especialidad
   projects.ts       Proyectos (plantillas) y textos de la página de caso
@@ -110,18 +114,16 @@ La lima tiene muy poco contraste con el verde niebla (1.1:1), así que sobre fon
 
 ### Motion
 
-`motion` se importa desde `motion/react` dentro de componentes de cliente (`"use client"`). Se usa en dos sitios:
+`motion` se importa desde `motion/react` dentro de componentes de cliente (`"use client"`). Se usa en el navbar (la línea lima se dibuja una sola vez al cargar) y en la escena del hero (fundido suave al cambiar de área). El movimiento reducido se comprueba con `useReducedMotion`, porque `MotionConfig reducedMotion="user"` no cubre `pathLength` ni la opacidad.
 
-- **Navbar** (`components/layout/navbar/`): la línea lima se dibuja una sola vez al cargar.
-- **Muestra del hero** (`components/sections/hero/ShowcaseCard.tsx`): cuatro vistas (Web / Frontend, Backend / Integraciones, IA / Automatización, Cloud / DevOps) en el mismo marco.
-  - Avanza cada 6 s con un giro 3D; la barra de progreso de la vista activa se llena durante ese tiempo.
-  - Se pausa con el cursor encima, con el foco de teclado dentro, con la pestaña oculta o con el botón de pausa (conserva el progreso).
-  - Botones de vista anterior y siguiente, y los indicadores permiten ir a cualquier vista.
-  - Con movimiento reducido no hay giro ni avance automático (y no se muestra el botón de pausa); el cambio manual usa un fundido.
+### Escena de producto del hero
 
-En ambos casos el movimiento reducido se comprueba con `useReducedMotion`, porque `MotionConfig reducedMotion="user"` no cubre `pathLength` ni la opacidad.
+El hero muestra una ventana de navegador grande, ligeramente inclinada en escritorio, con una aplicación web y, detrás a la derecha, un teléfono con su versión móvil. En móvil el teléfono asoma por encima de la ventana para no taparla.
 
-El contenido de las cuatro vistas está en `data/showcase.ts` y es **demostrativo** (etiquetado `DEMO VISUAL`): interfaz, código y flujos genéricos, sin proyectos, clientes ni datos reales. Está pensado para sustituirse por evidencia real de proyectos.
+- La aplicación es una **demo ficticia** (etiqueta `VISTA DE PRODUCTO · DEMO VISUAL`), sin marca, personas, métricas ni herramientas concretas. Está construida con componentes en `components/sections/hero/scene/` y su contenido está en `data/heroShowcase.ts`.
+- El selector `Web` · `Backend` · `IA` · `Cloud` es un grupo de pestañas accesible (clic, flechas, Inicio y Fin). Cada área es una sección de la misma app (Proyectos, Integraciones, Asistente IA, Despliegues) con navegación lateral, contenido central y panel de detalle. El cambio es manual, con un fundido suave; no hay avance automático.
+- La navegación lateral y el panel de detalle aparecen según el ancho de la ventana (container queries).
+- Para sustituir un área por capturas reales autorizadas, añade las imágenes a `public/images/` y rellena `heroScene.screenshots[área]` con `desktop` y/o `mobile` (`src`, `alt`, `width`, `height`). Si no hay captura, se muestra la demo.
 
 ## Pendiente
 

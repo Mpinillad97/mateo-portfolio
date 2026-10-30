@@ -1,67 +1,60 @@
-import { ButtonLink } from "@/components/ui/ButtonLink";
-import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import Link from "next/link";
 import { hero } from "@/data/site";
-import { ShowcaseCard } from "./hero/ShowcaseCard";
+import { HeroShowcase } from "./hero/HeroShowcase";
 
-// Una acción por público, cada una con su etiqueta, para que quede claro que
-// el Home sirve tanto a equipos como a clientes.
-const actions = [
-  { ...hero.teamsCta, variant: "primary" as const },
-  { ...hero.clientsCta, variant: "accent" as const },
-];
+const buttonBase =
+  "inline-flex h-14 w-full items-center justify-center gap-3 rounded-2xl px-8 text-lg font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-deep sm:w-auto lg:h-12 lg:px-6 lg:text-base xl:h-14 xl:px-8 xl:text-lg";
 
+// Separa el punto final del titular para pintarlo en lima.
+function splitFinalDot(line: string) {
+  return line.endsWith(".") ? [line.slice(0, -1), "."] : [line, ""];
+}
+
+// Hero del Home: mensaje a la izquierda y escena de producto a la derecha.
+// Usa un ancho mayor que el contenedor general para dar más peso a la escena.
 export function Hero() {
   const lastLine = hero.titleLines.length - 1;
 
   return (
-    <section
-      aria-labelledby="hero-title"
-      className="flex items-center py-14 sm:py-20 lg:min-h-[calc(100svh-4rem)] lg:py-20"
-    >
-      <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+    <section aria-labelledby="hero-title" className="overflow-x-clip pt-10 pb-16 sm:pt-12 lg:pt-12 lg:pb-14">
+      <div className="mx-auto grid w-full max-w-[86rem] items-center gap-14 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:gap-10 lg:px-8">
         <div>
-          <Eyebrow className="mb-6">{hero.eyebrow}</Eyebrow>
+          <p className="font-mono text-xs font-medium tracking-[0.24em] text-carbon-muted sm:text-[13px]">
+            {hero.eyebrow}
+          </p>
           <h1
             id="hero-title"
-            className="text-[2.6rem] font-semibold leading-[1.02] tracking-tighter text-balance sm:text-6xl lg:text-[3.75rem] xl:text-7xl"
+            className="mt-6 text-[2.6rem] leading-[0.98] font-semibold tracking-[-0.045em] sm:text-6xl lg:text-[2.9rem] xl:text-[4.1rem] min-[1400px]:text-[4.5rem]"
           >
-            {hero.titleLines.map((line, i) => (
-              <span key={line} className="block">
-                {i === lastLine ? (
-                  <span className="box-decoration-clone bg-[linear-gradient(transparent_64%,var(--color-lime)_64%,var(--color-lime)_92%,transparent_92%)]">
-                    {line}
-                  </span>
-                ) : (
-                  line
-                )}
-              </span>
-            ))}
+            {hero.titleLines.map((line, i) => {
+              const [text, dot] = i === lastLine ? splitFinalDot(line) : [line, ""];
+              return (
+                <span key={line} className="block">
+                  {text}
+                  {dot && <span className="text-lime">{dot}</span>}
+                </span>
+              );
+            })}
           </h1>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-carbon-muted sm:text-xl">
+          <p className="mt-7 max-w-[31rem] text-xl leading-relaxed text-carbon-muted sm:text-[1.375rem]">
             {hero.intro}
           </p>
-
-          <div className="mt-10 grid gap-5 sm:max-w-xl sm:grid-cols-2">
-            {actions.map((action) => (
-              <div key={action.href}>
-                <p className="mb-2.5 font-mono text-[11px] font-medium tracking-[0.2em] text-carbon-muted">
-                  {action.audience}
-                </p>
-                <ButtonLink href={action.href} variant={action.variant} className="w-full sm:w-auto">
-                  {action.label}
-                  <span aria-hidden className="ml-2">
-                    →
-                  </span>
-                </ButtonLink>
-              </div>
-            ))}
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <Link href={hero.teamsCta.href} className={`${buttonBase} bg-carbon text-lime hover:bg-carbon/90`}>
+              {hero.teamsCta.label}
+              <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href={hero.clientsCta.href}
+              className={`${buttonBase} border-[1.5px] border-carbon/60 text-carbon hover:border-carbon hover:bg-mist-dark`}
+            >
+              {hero.clientsCta.label}
+            </Link>
           </div>
         </div>
 
-        {/* La muestra acompaña al mensaje: columna más estrecha que el texto. */}
-        <ShowcaseCard className="mx-auto w-full max-w-md lg:mr-0" />
-      </Container>
+        <HeroShowcase />
+      </div>
     </section>
   );
 }
