@@ -2,28 +2,53 @@
 
 import { type LinkData, routes } from "./site";
 
+// Elección de audiencia (bajo el hero): dos recorridos claramente separados
+// para que equipos de contratación y clientes no entren por la ruta del otro.
+// Contenido provisional.
+
 export type EntryPoint = {
+  id: string;
   eyebrow: string;
   title: string;
+  // Pregunta que aclara a quién va dirigido el recorrido.
+  question: string;
   text: string;
+  // Público al que se dirige; se muestra como línea breve.
+  audience: string;
   link: LinkData;
-  tone: "dark" | "lime";
+  surface: "ivory" | "sage";
+  icon: "layers" | "code";
+};
+
+export const entryPointsSection = {
+  id: "elige-tu-recorrido",
+  kicker: "Elige tu recorrido",
+  title: "Dos formas de colaborar",
+  audienceLabel: "Pensado para",
 };
 
 export const entryPoints: EntryPoint[] = [
   {
-    eyebrow: "PARA EQUIPOS",
-    title: "¿Buscas a alguien para tu equipo?",
-    text: "Perfil profesional, capacidades técnicas y proyectos, pensados para quien contrata o lidera un equipo de desarrollo.",
-    link: { label: "Ir al perfil profesional", href: routes.teams },
-    tone: "dark",
+    id: "recorrido-equipos",
+    eyebrow: "COLABORACIÓN",
+    title: "Para equipos",
+    question: "¿Buscas contratar a un desarrollador?",
+    text: "Revisa mi experiencia, proyectos, tecnologías y cómo puedo aportar a tu equipo.",
+    audience: "Reclutadores, hiring managers y equipos que evalúan candidatos.",
+    link: { label: "Ver perfil profesional", href: routes.teams },
+    surface: "ivory",
+    icon: "layers",
   },
   {
-    eyebrow: "PARA CLIENTES",
-    title: "¿Tienes un proyecto en mente?",
-    text: "Tipos de proyectos, forma de trabajo y ejemplos, para personas o empresas que necesitan construir algo.",
-    link: { label: "Ver cómo trabajamos juntos", href: routes.clients },
-    tone: "lime",
+    id: "recorrido-clientes",
+    eyebrow: "SERVICIOS",
+    title: "Para clientes",
+    question: "¿Tienes un proyecto o necesitas resolver algo en tu negocio?",
+    text: "Conversemos sobre una web, automatización o integración que necesites.",
+    audience: "Personas y empresas que buscan contratar un proyecto o servicio.",
+    link: { label: "Explorar servicios", href: routes.clients },
+    surface: "sage",
+    icon: "code",
   },
 ];
 

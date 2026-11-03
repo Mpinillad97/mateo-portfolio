@@ -52,11 +52,9 @@ Las rutas se centralizan en `routes` (`data/site.ts`). Todas se generan como pá
 ```
 app/                Una carpeta por ruta (page.tsx), más layout.tsx y globals.css
 components/
-  layout/           Header (navbar grafito; los enlaces secundarios van en
-                    el menú) y Footer
-    navbar/         Piezas de la línea lima del navbar: Monogram (logo M),
-                    Rail, BranchFork, MobileMenu (panel del menú en todos
-                    los tamaños), geometría y animación
+  layout/           Header (navbar fijo: transparente sobre el hero y con
+                    fondo azul noche al desplazarse) y Footer
+    navbar/         Monogram (logo M)
   sections/         Bloques compuestos con contenido de data/: Hero,
                     EntryPoints, SelectedWork, WorkAreas, AboutTeaser,
                     AudienceCta, ContactOptionCard, PlaceholderSection
@@ -66,7 +64,7 @@ components/
   projects/         ProjectCard, ProjectGrid y CaseBlock (página de caso)
   ui/               Piezas genéricas: Container, Section, Band, PageHero,
                     Eyebrow, Card, ButtonLink, TextLink, CtaBanner,
-                    ItemGrid, Steps, Faq, TodoBlock, LanguageBadge
+                    ItemGrid, Steps, Faq, TodoBlock
 data/
   site.ts           Rutas, navegación, datos generales y textos del hero
   heroShowcase.ts   Escena del hero: áreas, navegación y contenido demo de
@@ -114,7 +112,7 @@ La lima tiene muy poco contraste con el verde niebla (1.1:1), así que sobre fon
 
 ### Motion
 
-`motion` se importa desde `motion/react` dentro de componentes de cliente (`"use client"`). Se usa en el navbar (la línea lima se dibuja una sola vez al cargar) y en la escena del hero (fundido suave al cambiar de área). El movimiento reducido se comprueba con `useReducedMotion`, porque `MotionConfig reducedMotion="user"` no cubre `pathLength` ni la opacidad.
+`motion` se importa desde `motion/react` dentro de componentes de cliente (`"use client"`). Se usa en la escena de producto del hero anterior (fundido suave al cambiar de área) y para leer `useReducedMotion` en la constelación. El movimiento reducido se comprueba con `useReducedMotion`, porque `MotionConfig reducedMotion="user"` no cubre `pathLength` ni la opacidad.
 
 ### Escena de producto del hero
 
@@ -130,7 +128,7 @@ El hero muestra una ventana de navegador grande, ligeramente inclinada en escrit
 - Contenido real: apellido, proyectos, textos de cada página, stack, biografía, trayectoria y canales de contacto (correo, LinkedIn, CV).
 - Titular del hero (provisional).
 - Tipografía definitiva (ahora se usa la fuente del sistema).
-- Traducciones: el indicador `ES` del navbar es solo visual.
+- Traducciones (el navbar ya no muestra indicador de idioma).
 - Imágenes en `public/images/`.
 - Menú de navegación en móvil (ahora es una fila desplazable).
 - Despliegue (no configurado todavía).

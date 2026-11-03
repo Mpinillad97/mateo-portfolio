@@ -38,6 +38,12 @@
   --color-lime-hover: #a5d54a; /* hover de botones lima */
   --color-lime-deep: #3a6212; /* versión legible del acento sobre fondos claros */
 
+  /* Hero con constelación (prototipo, sin aprobar) */
+  --color-night: #060c18; /* fondo del hero */
+  --color-slate: #a9b3c4; /* texto secundario sobre night (9:1) */
+  --color-cyan: #38e1f0; /* botón principal y acentos de la red */
+  --color-cyan-hover: #6ce9f4;
+
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 }

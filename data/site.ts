@@ -42,27 +42,16 @@ export const navItems: NavItem[] = [
   { label: "Contacto", href: routes.contact },
 ];
 
-export type NavbarRoute = {
-  key: "teams" | "clients";
-  label: string;
-  text: string;
-  href: string;
-};
-
-// Navbar: enlaces secundarios y los dos recorridos principales a los que
-// llegan las ramas de la línea. El pie de página sigue usando `navItems`.
+// Navbar: monograma y tres enlaces; `accent` pinta el enlace en lima.
+// El pie de página sigue usando `navItems`.
 export const navbar = {
+  label: "Navegación principal",
   homeLabel: "Mateo, ir al inicio",
-  secondary: [
+  links: [
     { label: "Proyectos", href: routes.projects },
     { label: "Sobre mí", href: routes.about },
-    { label: "Contacto", href: routes.contact },
-  ] satisfies NavItem[],
-  primary: [
-    { key: "teams", label: "EQUIPOS", text: "Ver perfil", href: routes.teams },
-    { key: "clients", label: "CLIENTES", text: "Tengo un proyecto", href: routes.clients },
-  ] satisfies NavbarRoute[],
-  menu: { open: "Menú", close: "Cerrar", label: "Menú principal" },
+    { label: "Contacto", href: routes.contact, accent: true },
+  ] satisfies (NavItem & { accent?: boolean })[],
 };
 
 export const isCurrentPath = (pathname: string, href: string) =>
@@ -76,6 +65,15 @@ export const hero = {
   intro:
     "Soy Mateo, desarrollador de software. Construyo productos web, integraciones y automatizaciones con IA.",
   // Una acción por cada público: equipos de contratación y clientes.
+  teamsCta: { label: "Para equipos", href: routes.teams },
+  clientsCta: { label: "Tengo un proyecto", href: routes.clients },
+};
+
+// Hero con constelación interactiva (prototipo). Contenido provisional.
+export const constellationHero = {
+  name: "Mateo Pinilla.",
+  role: "Desarrollador de software",
+  specialties: ["Full Stack", "IA y automatización", "Cloud & DevOps"],
   teamsCta: { label: "Para equipos", href: routes.teams },
   clientsCta: { label: "Tengo un proyecto", href: routes.clients },
 };
