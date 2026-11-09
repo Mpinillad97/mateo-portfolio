@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { type EntryPoint, entryPoints, entryPointsSection } from "@/data/home";
 
+// Colores de cada panel: fondo, forma decorativa, barra de acento y subrayado.
 const surfaces = {
-  ivory: "bg-ivory",
-  sage: "bg-mist",
+  sky: { panel: "bg-panel-sky", shape: "bg-panel-sky-shape", rule: "bg-aqua", underline: "border-aqua-deep" },
+  leaf: { panel: "bg-panel-leaf", shape: "bg-panel-leaf-shape", rule: "bg-lime", underline: "border-lime-mid" },
 };
 
 // Iconos de línea decorativos de cada recorrido.
@@ -40,21 +41,23 @@ function RouteIcon({ name }: { name: EntryPoint["icon"] }) {
 // Un recorrido. El enlace cubre toda la tarjeta con un pseudo-elemento, así
 // que toda ella es clicable y su nombre accesible es el texto del enlace.
 function EntryCard({ entry }: { entry: EntryPoint }) {
+  const surface = surfaces[entry.surface];
+
   return (
     <article
       aria-labelledby={`${entry.id}-title`}
-      className={`group relative flex h-full flex-col p-7 text-carbon transition-shadow duration-200 hover:shadow-[0_24px_50px_-28px_rgb(0_0_0/0.7)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-lime sm:p-10 lg:p-11 ${surfaces[entry.surface]}`}
+      className={`group relative flex h-full flex-col p-7 text-ink transition-shadow duration-200 hover:shadow-[0_24px_50px_-28px_rgb(24_36_58/0.55)] has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-ink sm:p-10 lg:p-11 ${surface.panel}`}
     >
       {/* Forma decorativa y icono, en la esquina superior derecha. */}
       <div aria-hidden className="absolute top-7 right-7 sm:top-10 sm:right-10">
-        <span className="absolute -right-2 -bottom-5 h-14 w-14 rounded-tl-full bg-mist-dark/80 sm:h-16 sm:w-16" />
+        <span className={`absolute -right-2 -bottom-5 h-14 w-14 rounded-tl-full sm:h-16 sm:w-16 ${surface.shape}`} />
         <RouteIcon name={entry.icon} />
       </div>
 
-      <p className="font-mono text-[10px] font-medium tracking-[0.3em] text-carbon-muted">
+      <p className="font-mono text-[10px] font-medium tracking-[0.3em] text-ink-muted">
         {entry.eyebrow}
       </p>
-      <span aria-hidden className="mt-2.5 block h-px w-9 bg-lime" />
+      <span aria-hidden className={`mt-2.5 block h-px w-9 ${surface.rule}`} />
 
       <h3
         id={`${entry.id}-title`}
@@ -65,11 +68,11 @@ function EntryCard({ entry }: { entry: EntryPoint }) {
       <p className="mt-4 max-w-md text-lg leading-snug font-semibold text-balance sm:text-xl">
         {entry.question}
       </p>
-      <p className="mt-2.5 max-w-md font-serif text-base leading-relaxed text-carbon-muted sm:text-[1.0625rem]">
+      <p className="mt-2.5 max-w-md font-serif text-base leading-relaxed text-ink-muted sm:text-[1.0625rem]">
         {entry.text}
       </p>
 
-      <p className="mt-5 max-w-md text-[13px] leading-relaxed text-carbon-muted">
+      <p className="mt-5 max-w-md text-[13px] leading-relaxed text-ink-muted">
         <span className="font-mono text-[9.5px] font-semibold tracking-[0.2em] uppercase">
           {entryPointsSection.audienceLabel}:
         </span>{" "}
@@ -80,7 +83,7 @@ function EntryCard({ entry }: { entry: EntryPoint }) {
         href={entry.link.href}
         className="mt-7 inline-flex items-center gap-3 self-start font-serif text-lg after:absolute after:inset-0 focus-visible:outline-none sm:mt-auto sm:pt-8"
       >
-        <span className="border-b-[1.5px] border-lime pb-1 transition-colors group-hover:border-carbon">
+        <span className={`border-b-[1.5px] pb-1 transition-colors group-hover:border-ink ${surface.underline}`}>
           {entry.link.label}
         </span>
         <span
@@ -94,17 +97,17 @@ function EntryCard({ entry }: { entry: EntryPoint }) {
   );
 }
 
-// Elección de audiencia: contenedor grafito con dos recorridos contrastados
+// Elección de audiencia: contenedor marfil con dos recorridos contrastados
 // separados por una línea lima (vertical en escritorio, horizontal en móvil).
 export function EntryPoints() {
   const [teams, clients] = entryPoints;
 
   return (
-    // El fondo grafito ocupa todo el ancho; el contenido se alinea con el hero.
+    // El fondo marfil ocupa todo el ancho; el contenido se alinea con el hero.
     <section
       id={entryPointsSection.id}
       aria-labelledby={`${entryPointsSection.id}-title`}
-      className="scroll-mt-20 bg-graphite text-ivory"
+      className="scroll-mt-20 bg-ivory text-ink"
     >
       <div className="mx-auto max-w-[86rem] px-5 py-14 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
         <p className="flex items-center gap-3.5 font-serif text-lg sm:text-xl">

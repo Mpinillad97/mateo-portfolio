@@ -16,7 +16,7 @@ export type EntryPoint = {
   // Público al que se dirige; se muestra como línea breve.
   audience: string;
   link: LinkData;
-  surface: "ivory" | "sage";
+  surface: "sky" | "leaf";
   icon: "layers" | "code";
 };
 
@@ -36,7 +36,7 @@ export const entryPoints: EntryPoint[] = [
     text: "Revisa mi experiencia, proyectos, tecnologías y cómo puedo aportar a tu equipo.",
     audience: "Reclutadores, hiring managers y equipos que evalúan candidatos.",
     link: { label: "Ver perfil profesional", href: routes.teams },
-    surface: "ivory",
+    surface: "sky",
     icon: "layers",
   },
   {
@@ -47,7 +47,7 @@ export const entryPoints: EntryPoint[] = [
     text: "Conversemos sobre una web, automatización o integración que necesites.",
     audience: "Personas y empresas que buscan contratar un proyecto o servicio.",
     link: { label: "Explorar servicios", href: routes.clients },
-    surface: "sage",
+    surface: "leaf",
     icon: "code",
   },
 ];

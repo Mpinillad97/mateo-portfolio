@@ -44,6 +44,20 @@
   --color-cyan: #38e1f0; /* botón principal y acentos de la red */
   --color-cyan-hover: #6ce9f4;
 
+  /* Sección "Elige tu recorrido" (sobre fondo ivory). Contrastes:
+     ink ≥ 12.4:1 e ink-muted ≥ 6:1 sobre ivory y ambos paneles;
+     aqua-deep y lime-mid ≥ 3.2:1 (subrayados). aqua y lime puros
+     (< 2:1) solo se usan en barras decorativas. */
+  --color-ink: #18243a; /* títulos y texto principal */
+  --color-ink-muted: #46566b; /* descripciones */
+  --color-panel-sky: #dce7f2; /* panel "Para equipos" */
+  --color-panel-sky-shape: #c9d9ea; /* forma decorativa del panel */
+  --color-panel-leaf: #ecf1d8; /* panel "Para clientes" */
+  --color-panel-leaf-shape: #dce5bd;
+  --color-aqua: #27bfd0; /* acento de equipos */
+  --color-aqua-deep: #1a8c9c; /* acento de equipos legible sobre claro */
+  --color-lime-mid: #5e8a1c; /* acento de clientes legible sobre claro */
+
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 }
