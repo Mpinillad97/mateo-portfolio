@@ -1,6 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TextLink } from "@/components/ui/TextLink";
-import { TodoBlock } from "@/components/ui/TodoBlock";
+import { ContactChannels } from "@/components/ui/ContactChannels";
 import { type ContactOption } from "@/data/contact";
 
 const dotClasses = { dark: "bg-carbon", lime: "bg-lime-deep" };
@@ -30,7 +30,9 @@ export function ContactOptionCard({ option }: { option: ContactOption }) {
         ))}
       </ul>
 
-      <TodoBlock title={option.channelTodo} className="mt-8" />
+      <div className="mt-8">
+        <ContactChannels ids={option.channels} variant="card" label="Canales" />
+      </div>
 
       <TextLink href={option.related.href} className="mt-8 self-start">
         {option.related.label}

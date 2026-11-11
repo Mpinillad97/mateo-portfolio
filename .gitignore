@@ -29,3 +29,6 @@ Thumbs.db
 
 # despliegue
 .vercel
+
+# documentación interna (guía, decisiones): nombra terceros sin permiso de publicación
+/docs-internos/

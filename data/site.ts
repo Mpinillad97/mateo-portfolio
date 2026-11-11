@@ -1,10 +1,5 @@
 // Contenido general del sitio. Todo lo marcado con TODO está pendiente de definir.
 
-export type NavItem = {
-  label: string;
-  href: string;
-};
-
 export type LinkData = {
   label: string;
   href: string;
@@ -25,25 +20,16 @@ export const routes = {
 export const projectPath = (slug: string) => `${routes.projects}/${slug}`;
 
 export const site = {
-  name: "Mateo",
-  // TODO: confirmar el apellido o la forma en que se mostrará el nombre completo.
-  fullName: "Mateo [TODO: apellido]",
-  role: "Desarrollador Full Stack",
-  description: "Portafolio de Mateo, desarrollador Full Stack.",
-  // Solo visual por ahora. TODO: implementar traducciones.
+  fullName: "Mateo Pinilla",
+  role: "Desarrollador de software",
+  specialties: ["Full Stack", "IA y automatización", "Cloud & DevOps"] as const,
+  description:
+    "Portafolio de Mateo Pinilla, desarrollador de software: Full Stack, IA y automatización, Cloud & DevOps.",
+  // Solo visual por ahora. TODO: implementar traducciones (D-006).
   language: { code: "ES", label: "Español" },
 };
 
-export const navItems: NavItem[] = [
-  { label: "Proyectos", href: routes.projects },
-  { label: "Para equipos", href: routes.teams },
-  { label: "Para clientes", href: routes.clients },
-  { label: "Sobre mí", href: routes.about },
-  { label: "Contacto", href: routes.contact },
-];
-
 // Navbar: monograma y tres enlaces; `accent` pinta el enlace en lima.
-// El pie de página sigue usando `navItems`.
 export const navbar = {
   label: "Navegación principal",
   homeLabel: "Mateo, ir al inicio",
@@ -51,7 +37,7 @@ export const navbar = {
     { label: "Proyectos", href: routes.projects },
     { label: "Sobre mí", href: routes.about },
     { label: "Contacto", href: routes.contact, accent: true },
-  ] satisfies (NavItem & { accent?: boolean })[],
+  ] satisfies (LinkData & { accent?: boolean })[],
 };
 
 export const isCurrentPath = (pathname: string, href: string) =>
@@ -69,11 +55,24 @@ export const hero = {
   clientsCta: { label: "Tengo un proyecto", href: routes.clients },
 };
 
-// Hero con constelación interactiva (prototipo). Contenido provisional.
+// Hero con constelación: consume los valores del sitio, sin repetirlos.
 export const constellationHero = {
-  name: "Mateo Pinilla.",
-  role: "Desarrollador de software",
-  specialties: ["Full Stack", "IA y automatización", "Cloud & DevOps"],
+  name: site.fullName,
+  role: site.role,
+  specialties: site.specialties,
   teamsCta: { label: "Para equipos", href: routes.teams },
   clientsCta: { label: "Tengo un proyecto", href: routes.clients },
+};
+
+// Pie de página global.
+export const footer = {
+  contactLabel: "Contacto",
+  tagline: "Full Stack · IA y automatización · Cloud & DevOps",
+  nav: [
+    { label: "Proyectos", href: routes.projects },
+    { label: "Para equipos", href: routes.teams },
+    { label: "Para clientes", href: routes.clients },
+    { label: "Sobre mí", href: routes.about },
+    { label: "Contacto", href: routes.contact },
+  ] satisfies LinkData[],
 };

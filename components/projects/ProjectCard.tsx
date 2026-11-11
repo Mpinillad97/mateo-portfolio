@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
-import { type Project } from "@/data/projects";
+import { type Project, statusLabels } from "@/data/projects";
 import { projectPath } from "@/data/site";
 
 // "team" destaca la contribución técnica; "client", el problema y la solución.
@@ -12,7 +12,7 @@ function details(project: Project, variant: ProjectCardVariant) {
       { label: "CONTRIBUCIÓN", value: project.contribution ?? "[TODO: contribución técnica.]" },
       {
         label: "DECISIONES",
-        value: project.decisions?.join(" · ") ?? "[TODO: decisiones técnicas clave.]",
+        value: project.decisions?.slice(0, 3).join(" · ") ?? "[TODO: decisiones técnicas clave.]",
       },
     ];
   }
@@ -37,6 +37,9 @@ export function ProjectCard({
   // El enlace del título cubre toda la tarjeta con un pseudo-elemento.
   return (
     <Card className="relative flex h-full flex-col transition-colors hover:border-carbon/40 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-lime-deep">
+      <p className="mb-2 font-mono text-xs tracking-wide text-carbon-muted">
+        {statusLabels[project.status]}
+      </p>
       <h3 className="text-lg font-semibold">
         <Link
           href={projectPath(project.slug)}

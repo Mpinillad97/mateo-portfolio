@@ -58,6 +58,11 @@
   --color-aqua-deep: #1a8c9c; /* acento de equipos legible sobre claro */
   --color-lime-mid: #5e8a1c; /* acento de clientes legible sobre claro */
 
+  /* Home: fondos claros intermedios, misma familia cálida que ivory.
+     paper: ink 14.9:1, ink-muted 7.2:1. sand: ink 12.1:1, ink-muted 5.8:1. */
+  --color-paper: #fbfaf6; /* sección Proyectos destacados */
+  --color-sand: #e8e3d3; /* sección Áreas y panel decorativo */
+
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 }

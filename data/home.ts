@@ -52,30 +52,54 @@ export const entryPoints: EntryPoint[] = [
   },
 ];
 
-export const selectedWork = {
-  id: "trabajo-seleccionado",
+export const featuredWork = {
+  id: "proyectos-destacados",
   eyebrow: "PROYECTOS",
-  title: "Trabajo seleccionado",
-  intro: "[TODO: frase breve que presente la selección de proyectos.]",
+  title: "Proyectos destacados",
+  intro:
+    "Casos para ver cómo trabajo: qué se necesitaba, qué hice yo y con qué tecnologías. Cada ficha aclara su alcance real.",
   link: { label: "Ver todos los proyectos", href: routes.projects },
+  cardLabel: "Ver caso",
+  empty: "Pronto publicaré aquí los primeros casos.",
 };
 
 export const workAreasSection = {
   id: "areas-de-trabajo",
   eyebrow: "CAPACIDADES",
   title: "Áreas de trabajo",
-  intro: "[TODO: frase breve sobre cómo se combinan estas áreas.]",
+  intro: "Tres áreas que se combinan según lo que cada proyecto necesita.",
 };
 
 export const aboutTeaser = {
   id: "presentacion",
   eyebrow: "SOBRE MÍ",
   title: "Hola, soy Mateo.",
-  text: "[TODO: presentación breve en dos o tres líneas.]",
+  // Solo el posicionamiento de la guía/D-003. No añadir biografía.
+  text: "Soy desarrollador de software. Mi experiencia se inclina hacia el backend, también trabajo en frontend y me muevo entre Full Stack, IA y automatización y Cloud & DevOps.",
+  // Mientras P-03 esté abierto se muestra este aviso.
+  todo: "[TODO P-03: Mateo aportará su historia personal en 2–3 líneas, en primera persona. Foto opcional.]",
+  provisional: true,
+  photo: undefined as
+    | { src: string; alt: string; width: number; height: number }
+    | undefined, // TODO P-03
   link: { label: "Conocer más sobre mí", href: routes.about },
 };
 
-// Cierre con dos acciones diferenciadas. Se reutiliza en otras páginas.
+export const contactClosing = {
+  id: "contacto-cierre",
+  eyebrow: "CONTACTO",
+  title: "¿Hablamos?",
+  text: "Si buscas sumar a alguien a tu equipo o tienes un proyecto en mente, escríbeme y vemos el siguiente paso.",
+  primary: { label: "Escríbeme", href: routes.contact },
+  secondary: [
+    { label: "Oportunidad en un equipo", href: routes.contactTeams },
+    { label: "Tengo un proyecto", href: routes.contactClients },
+  ] satisfies LinkData[],
+  channelsLabel: "Canales de contacto",
+};
+
+// Cierre con dos acciones diferenciadas. Ya no se usa en el Home; lo siguen
+// usando /proyectos, la ficha de proyecto y /sobre-mi.
 export const audienceCta = {
   label: "Siguiente paso",
   teams: {
